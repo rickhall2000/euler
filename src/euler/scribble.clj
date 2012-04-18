@@ -1,4 +1,6 @@
-(ns euler.scribble)
+(ns euler.scribble
+(:require [euler.common :as util]
+            [clojure.math.numeric-tower :as cmath]))
 
 
 (defn prime? [base]
@@ -91,3 +93,37 @@
 (defn problem10 []
   (time
   (reduce + (filter #(prime? %) (rangeb *limit*)))))
+
+  
+;; problem 10 - another try
+
+(def squares  (into [] (for [x (range 1415)] (* x x))))
+
+(defn least-square [tested]
+  (- (count
+  (for [nums squares
+        :while (< nums tested)] nums )) 1))
+
+(defn try-primes [base primes]
+  (for [x primes :while (not (=  0 (rem base x)))]  x))
+
+(defn prime2? [base primes]
+  (let [biggestProblem (least-square base)]
+  (let [test-vals (filter #(<= % (/ base biggestProblem)) primes)]
+  (= test-vals (try-primes base test-vals)))))
+
+(defn add-prime [primes start]
+  (let [target (inc start)]
+    (if (prime2? target primes)
+      (conj primes target)
+      (add-prime primes target) )))
+
+(defn build-prime [primes]
+  (if (< 20000000 (last primes))
+         (butlast primes)
+  (recur (add-prime primes
+            (last primes)))))
+
+(defn problem10 []
+  (time
+   (reduce + (build-prime [2]))))
