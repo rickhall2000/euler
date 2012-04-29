@@ -12,18 +12,13 @@
   (range upper-limit))))
 
 ;; problem 2
-(defn fibs []
-  (map first
-       (iterate
-         (fn [[a b]]
-           [b (+ a b)]) [0 1])))
 
 (defn problem2 [biggest]
   "sum even fibbonacci numbers below [biggest]"
   (reduce +
           (filter #(= 0 (rem % 2))
           (take-while #(< % biggest)
-              (fibs)))))
+              (util/fibs)))))
 
 
 ;; problem 3
