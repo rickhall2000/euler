@@ -63,3 +63,7 @@
 (deftest problem20-actual
   (testing "Testing actual solution of problem 20 for refactoring"
     (is (= 648 (problem20 100)))))
+
+(deftest prob25-test
+  (testing "The 12th term of fibbonacci sequence is the first in 3 digits"
+    (is (= 12 (problem25 3)))))
