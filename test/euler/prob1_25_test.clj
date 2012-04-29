@@ -64,6 +64,18 @@
   (testing "Testing actual solution of problem 20 for refactoring"
     (is (= 648 (problem20 100)))))
 
+(deftest proper-factor-test
+  (testing "The sum of the proper factors of 220 is 284"
+    (is (= 284 (get-sum-of-proper-factors 220)))))
+
+(deftest amicable-test
+  (testing "220 and 284 are amicable numbers"
+    (is (= 284 (get (make-factor-sum-pairs 220) 220 ) ))))
+
+(deftest problem21-actual
+  (testing "Checking 21 with the real answer cause its easier that way"
+    (is (= 31626 (problem21 10000)))))
+
 (deftest prob25-test
   (testing "The 12th term of fibbonacci sequence is the first in 3 digits"
     (is (= 12 (problem25 3)))))
