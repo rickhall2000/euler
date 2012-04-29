@@ -364,11 +364,10 @@
 
 ;; problem 16
 
-(def nums-as-cars (seq (str (cmath/expt 2M 1000))))
-
-(defn  problem16 []
+(defn  problem16 [power-of-two]
   (apply +
-         (map #(Integer/parseInt (str %)) nums-as-cars)))
+         (map #(Integer/parseInt (str %))
+              (util/number-to-char-sequence (cmath/expt 2M power-of-two)))))
 
 
 ;; problem 17
@@ -445,11 +444,11 @@
       acc
       (recur (dec n) (* acc n)))))
 
-(def nums-as-cars (seq (str (fact 100M))))
+(def nums-as-cars2 (seq (str (fact 100M))))
 
 (defn problem20 []
   (apply +
-         (map #(Integer/parseInt (str %)) nums-as-cars)))
+         (map #(Integer/parseInt (str %)) nums-as-cars2)))
 
 
 ;; problem 21

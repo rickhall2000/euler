@@ -6,6 +6,13 @@
   (list 'range 1 (list '+ 1 last)))
 
 
+(defn number-to-char-sequence [number]
+  (seq (str number)))
+
+
+
+
+
 (defn all-divisors [n]
   (for [i (rangeb n) :when (zero? (rem n i))]
     i))
