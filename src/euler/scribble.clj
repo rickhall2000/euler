@@ -3,35 +3,35 @@
             [clojure.math.numeric-tower :as cmath]))
 
 
-(defn prime? [base]
+#_(defn prime? [base]
   (and (not (contains? seive base) )
   (= base (nth (lazy-factor base) 1))))
 
 
-(defn next-prime [start]
+#_(defn next-prime [start]
   (let [target (inc start)]
   (if (prime? target) target
               (next-prime target))))
 
-(def squares  (into [] (for [x (range 1415)] (* x x))))
+#_(def squares  (into [] (for [x (range 1415)] (* x x))))
 
 
-(defn least-square [tested]
+#_(defn least-square [tested]
   (- (count
   (for [nums squares
         :while (< nums tested)] nums )) 1))
 
-(defn try-primes [base primes]
+#_(defn try-primes [base primes]
   (for [x primes :while (not (=  0 (rem base x)))]  x))
 
 
-(defn prime2? [base primes]
+#_(defn prime2? [base primes]
   (and (not (contains? sieve base))
   (let [test-vals (filter #(<= % (/ base 2)) primes)]
   (= test-vals (try-primes base test-vals)))))
 
 
-(defn add-prime [primes start]
+#_(defn add-prime [primes start]
   (let [target (inc start)]
     (if (prime2? target primes)
       (conj primes target)
@@ -39,17 +39,17 @@
 
 
 
-(defn build-prime [primes]
+#_(defn build-prime [primes]
   (if (< 2000000 (last primes))
          (butlast primes)
   (recur (add-prime primes
             (last primes)))))
 
-(defn problem10 []
+#_(defn problem10 []
   (time
 (reduce + (build-prime [2]))))
 
-(problem10)
+#_(problem10)
 
 ;;"Elapsed time: 1.0495164543446E7 msecs"
 ;;142913828922
@@ -59,15 +59,15 @@
 ;;21171191
 
 
-(def *limit* 2000000)
+#_(def *limit* 2000000)
 
-(defn build-mults [base]
+#_(defn build-mults [base]
   (take-while (partial > *limit*) (iterate (partial + base) (+ base base) ) ))
 
-(defn not-prime [prior newprime]
+#_(defn not-prime [prior newprime]
   (into prior (build-mults newprime)))
 
-(def sieve
+#_(def sieve
 (-> (not-prime #{1} 2)
     (#(not-prime % 3))
     (#(not-prime % 5))
@@ -90,40 +90,40 @@
     (#(not-prime % 71))
     (#(not-prime % 73))))
 
-(defn problem10 []
+#_(defn problem10 []
   (time
   (reduce + (filter #(prime? %) (rangeb *limit*)))))
 
-  
+
 ;; problem 10 - another try
 
-(def squares  (into [] (for [x (range 1415)] (* x x))))
+#_(def squares  (into [] (for [x (range 1415)] (* x x))))
 
-(defn least-square [tested]
+#_(defn least-square [tested]
   (- (count
   (for [nums squares
         :while (< nums tested)] nums )) 1))
 
-(defn try-primes [base primes]
+#_(defn try-primes [base primes]
   (for [x primes :while (not (=  0 (rem base x)))]  x))
 
-(defn prime2? [base primes]
+#_(defn prime2? [base primes]
   (let [biggestProblem (least-square base)]
   (let [test-vals (filter #(<= % (/ base biggestProblem)) primes)]
   (= test-vals (try-primes base test-vals)))))
 
-(defn add-prime [primes start]
+#_(defn add-prime [primes start]
   (let [target (inc start)]
     (if (prime2? target primes)
       (conj primes target)
       (add-prime primes target) )))
 
-(defn build-prime [primes]
+#_(defn build-prime [primes]
   (if (< 20000000 (last primes))
          (butlast primes)
   (recur (add-prime primes
             (last primes)))))
 
-(defn problem10 []
+#_(defn problem10 []
   (time
    (reduce + (build-prime [2]))))

@@ -3,15 +3,13 @@
             [clojure.math.numeric-tower :as cmath]))
 
 ;; problem 1
-(def problem1
-  "Sum the multiples of 3 or 5 under 1000"
+(defn problem1 [upper-limit]
+  "Sum the multiples of 3 or 5 under upper-limit"
   (reduce + (filter
     #(or
        (= 0 (rem % 3))
        (= 0 (rem % 5)))
-  (range 1000))))
-
-
+  (range upper-limit))))
 
 ;; problem 2
 (defn fibs []
@@ -23,17 +21,15 @@
 (defn problem2 [biggest]
   "sum even fibbonacci numbers below [biggest]"
   (reduce +
-  (filter #(= 0 (rem % 2))
-  (take-while #(< % biggest)
+          (filter #(= 0 (rem % 2))
+          (take-while #(< % biggest)
               (fibs)))))
-
-(problem2 4000000)
 
 
 ;; problem 3
+(defn problem3 [target]
+  (apply max (util/prime-factors target)))
 
-(def problem3
-  (apply max (util/prime-factors 600851475143)))
 
 
 ;; problem 4
@@ -41,10 +37,10 @@
   (= (seq input-str) (reverse input-str)))
 
 
-(def problem4
+(defn problem4 [largest-divisor]
   (apply max
-  (for [x (range 999 99 -1) y (range 999 99 -1)
-        :when (palindrome? (str (* x y)))] (* x y))))
+         (for [x (range largest-divisor 9 -1) y (range largest-divisor 9 -1)
+               :when (palindrome? (str (* x y)))] (* x y))))
 
 
 
@@ -64,8 +60,8 @@
        (seq (find-prime-factor-count upper))))
 
 
-(def problem5
-  (apply * (build-factor-list 20)))
+(defn problem5 [max-factor]
+  (apply * (build-factor-list max-factor)))
 
 
 
@@ -82,7 +78,6 @@
 (defn problem6 [x]
   (- (square-of-sum x) (sum-of-squares x)))
 
-(problem6 100)
 
 
 ;; problem 7
@@ -92,8 +87,8 @@
     (if (util/prime? target) target
         (next-prime target))))
 
-(def problem7
-  (nth (iterate next-prime 2) 10000))
+(defn problem7 [which-n]
+  (nth (iterate next-prime 2) (- which-n 1)))
 
 
 
@@ -133,13 +128,13 @@
      (map #(convert-chars-to-nums %)
           (get-by-fives longstring))))
 
-(def problem8
+(defn problem8 []
   (apply max (get-products)))
 
 
 ;; problem 9
 
-(def problem9
+(defn problem9 []
   (for [a (util/rangeb 1000)
         b (util/rangeb 1000)
         c (util/rangeb 1000)
@@ -150,7 +145,7 @@
     (* a b c)))
 
 
-
+(defn problem10 [] )
 
 
 
@@ -214,7 +209,7 @@
               (map get-vals
                    (get-all-lines-from-point [a b])))))
 
-(def problem11
+(defn problem11 []
   (apply max
          (map best-from-point
               (for [a (range grid-size)
@@ -223,7 +218,7 @@
 
 ;; Problem 12
 
-(def problem12
+(defn problem12 []
   (loop [[a b] [1 2] ]
     (if (and (>= a 17907120)
              (> (count (util/prime-factors a)) 10)
@@ -342,7 +337,7 @@
 
 (def as-str (str thesum))
 
-(def problem13 (take 10 (seq as-str)))
+(defn problem13 []  (take 10 (seq as-str)))
 
 ;; problem 14
 (defn odd-f [n]
@@ -360,7 +355,7 @@
                   (odd? n) (odd-f n)
                   (even? n) (even-f n) )) start  )))
 
-(def problem14
+(defn problem14 []
   (first
    (sort-by last >
             (pmap #(list % (count (silly-seq %)))
@@ -371,7 +366,7 @@
 
 (def nums-as-cars (seq (str (cmath/expt 2M 1000))))
 
-(def problem16
+(defn  problem16 []
   (apply +
          (map #(Integer/parseInt (str %)) nums-as-cars)))
 
@@ -438,7 +433,7 @@
       (= n 1000) "onethousand"
       :else "")))
 
-(def problem17
+(defn problem17 []
   (reduce +
           (map #(count (num-to-words %))
                (util/rangeb 1000))))
@@ -452,7 +447,7 @@
 
 (def nums-as-cars (seq (str (fact 100M))))
 
-(def problem20
+(defn problem20 []
   (apply +
          (map #(Integer/parseInt (str %)) nums-as-cars)))
 
@@ -465,15 +460,13 @@
            {n (apply + (util/all-divisors n))})))
 
 
-(def problem21
+(defn problem21 []
   (for [a num-pairs
         :when (and (= (first a)
                       (get num-pairs (first (rest a))))
                    (not (= (first a) (first (rest a)))))]
     (first a)))
 
-
-(apply + problem21)
 
 
 ;; problem 25
@@ -493,8 +486,8 @@
 
 
 
-(take 1 (filter #(= 1000
+#_(take 1 (filter #(= 1000
                     (count (str %))) (fibs)))
 
-(count (take-while #(> 1000 (count (str %)))
+#_(count (take-while #(> 1000 (count (str %)))
             (fibs)))

@@ -23,13 +23,6 @@
     (recur (+ n c) (- n 1)))))
 
 
-(time (triangle 1000000))
-
-(defn exp [x n]
-  (reduce * (repeat n x)))
-
-
-(def max (* 6 (exp 9 5)))
 
 (defn tri [n]
   (/ (* n (+ n 1)) 2))
@@ -40,13 +33,9 @@
 (defn hex [n]
   (* n (- (* 2 n) 1)))
 
-
- (take 5      (iterate inc 1))
-
 (defn tri? [n]
   (* 2 (/ n (- n 1) )))
 
-(tri? 15)
 
 (defmacro foreach [[sym coll] & body]
   `(loop [coll# ~coll]
