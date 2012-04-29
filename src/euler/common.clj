@@ -10,6 +10,11 @@
   (seq (str number)))
 
 
+(defn factorial [start]
+  (loop [n start acc 1 ]
+    (if (< n 2)
+      acc
+      (recur (dec n) (* acc n)))))
 
 
 

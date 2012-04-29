@@ -438,21 +438,15 @@
                (util/rangeb 1000))))
 
 ;; problem 20
-(defn fact [start]
-  (loop [n start acc 1 ]
-    (if (< n 2)
-      acc
-      (recur (dec n) (* acc n)))))
 
-(def nums-as-cars2 (seq (str (fact 100M))))
-
-(defn problem20 []
+(defn problem20 [target]
   (apply +
-         (map #(Integer/parseInt (str %)) nums-as-cars2)))
+         (map #(Integer/parseInt (str %))
+              (util/number-to-char-sequence
+               (util/factorial (bigint target))))))
 
 
 ;; problem 21
-
 (def num-pairs
   (apply conj {}
          (for [n (util/rangeb 10000)]
