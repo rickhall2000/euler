@@ -442,40 +442,28 @@
 
 
 ;; problem 21
-(def num-pairs
+(defn get-sum-of-proper-factors [n]
+  (- (apply + (util/all-divisors n) )  n))
+
+
+(defn make-factor-sum-pairs [largest-base]
   (apply conj {}
-         (for [n (util/rangeb 10000)]
-           {n (apply + (util/all-divisors n))})))
+         (for [n (util/rangeb largest-base)]
+           {n (- (apply + (util/all-divisors n)) n )})))
 
 
-(defn problem21 []
-  (for [a num-pairs
-        :when (and (= (first a)
-                      (get num-pairs (first (rest a))))
-                   (not (= (first a) (first (rest a)))))]
-    (first a)))
-
+(defn problem21 [largest-base]
+  (let [pair-list (make-factor-sum-pairs largest-base)]
+    (apply +
+           (for [a pair-list
+                 :when
+                 (and
+                  (not (= (first a) (first (rest a))))
+                  (= (first a) (get pair-list (first (rest a)))))]
+             (first a)))))
 
 
 ;; problem 25
 
-(defn fibs []
-  (map first
-       (iterate
-        (fn [[a b]]
-          [b (+ a b)]) [0N 1N])))
-
-(defn prob2 [biggest]
-  "sum even fibbonacci numbers below [biggest]"
-  (reduce +
-          (filter #(= 0 (rem % 2))
-                  (take-while #(< % biggest)
-                              (fibs)))))
-
-
-
-#_(take 1 (filter #(= 1000
-                    (count (str %))) (fibs)))
-
-#_(count (take-while #(> 1000 (count (str %)))
-            (fibs)))
+(defn problem25 [digits]
+  (count (take-while #(> digits (count (str %))) (util/fibs))))

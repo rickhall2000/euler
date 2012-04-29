@@ -4,13 +4,21 @@
 
 
 ;; problem 29
-(defn problem29 []
+#_(defn problem29 []
   (let [max 101N]
   (count
    (into #{}
-         (for [a (range 2N max)
+         (for [a (range 2N (+ 1 max))
                b (range 2N max)]
            (cmath/expt a b))))))
+
+(defn problem29 [max]
+  (count
+   (into #{}
+         (for [a (range 2N (+ 1 max))
+               b (range 2N (+ 1 max))]
+           (cmath/expt a b)))))
+
 
 
 ;; problem 30
