@@ -4,14 +4,6 @@
 
 
 ;; problem 29
-#_(defn problem29 []
-  (let [max 101N]
-  (count
-   (into #{}
-         (for [a (range 2N (+ 1 max))
-               b (range 2N max)]
-           (cmath/expt a b))))))
-
 (defn problem29 [max]
   (count
    (into #{}
@@ -36,3 +28,19 @@
        (for [i (range 2 max)
              :when (= i (sum-digs-to-5th i))]
          i))
+
+
+(defn char-to-power [char power]
+  (let [num (Integer/parseInt (str char))]
+    (cmath/expt num power)))
+
+(defn sum-digits-to-nth [num power]
+  (let [each (seq (str num))]
+    (reduce +
+            (map (fn [digit] (char-to-power digit power))
+                 each))))
+
+(defn problem30 [power-to-use max-to-test]
+  (apply +
+  (for [a (range 2 max-to-test)
+        :when (= a (sum-digits-to-nth a power-to-use))] a)))
