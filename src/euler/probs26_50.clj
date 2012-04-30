@@ -44,3 +44,14 @@
   (apply +
   (for [a (range 2 max-to-test)
         :when (= a (sum-digits-to-nth a power-to-use))] a)))
+
+(defn series-n-to-nth [max]
+  (reduce +
+          (for [n (util/rangeb max)]
+            (cmath/expt (bigint n) n))))
+
+(defn problem48 [max]
+  (apply str
+         (reverse
+          (take 10 (reverse
+                    (seq (str (series-n-to-nth max))))))))

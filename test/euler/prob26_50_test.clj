@@ -17,3 +17,11 @@
 (deftest prob30-test
   (testing "sum of numbers can be written as 4th power of digits"
     (is (= 19316 (problem30 4 9999)))))
+
+(deftest series-n-to-nth-test
+  (testing "sum of 1^1 .. 10^10 = 10405071317"
+    (is (= 10405071317 (series-n-to-nth 10)))))
+
+(deftest prob48-test
+  (testing "last 10 digits of series 10^10 = 0405071317"
+    (is (= "0405071317" (problem48 10)))))
