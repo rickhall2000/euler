@@ -356,9 +356,12 @@
             (pmap #(list % (count (silly-seq %)))
                   (range 1000000)))))
 
+;; problem 15
+(defn problem15 [grid-size]
+  (reduce max (last (take (+ 1 (* 2 grid-size)) (iterate util/pascal-row [1])))))
+
 
 ;; problem 16
-
 (defn  problem16 [power-of-two]
   (apply +
          (map #(Integer/parseInt (str %))

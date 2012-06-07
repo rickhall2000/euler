@@ -39,8 +39,6 @@
     c
     (recur (+ n c) (- n 1)))))
 
-
-
 (defn tri [n]
   (/ (* n (+ n 1)) 2))
 
@@ -52,7 +50,6 @@
 
 (defn tri? [n]
   (* 2 (/ n (- n 1) )))
-
 
 (defmacro foreach [[sym coll] & body]
   `(loop [coll# ~coll]
@@ -70,7 +67,6 @@
                     %)
                  form))
 ;; prime/factor functions
-
 
 (defn lazy-factor [base]
   (for [x (rangeb base)
@@ -90,3 +86,6 @@
 
 (defn prime-factors [base]
   (filter #(prime? %)  (factor-tree base)))
+
+(defn pascal-row [prior-row]
+  (vec (concat [1] (map #(apply + %) (partition 2 1 prior-row)) [1] )))

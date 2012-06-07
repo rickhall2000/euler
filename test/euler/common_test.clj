@@ -10,3 +10,7 @@
 (deftest all-divisor-sum-test
   (testing "The sum of all divisors of 220 is 504"
     (is (= 504 (apply + (all-divisors 220))))))
+
+(deftest pascal-row-test
+  (testing "Passing in [1 1] to pascal-row should yield [1 2 1]"
+    (is (= [1 2 1] (pascal-row [1 1])))))

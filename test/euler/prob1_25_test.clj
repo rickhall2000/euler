@@ -79,3 +79,11 @@
 (deftest prob25-test
   (testing "The 12th term of fibbonacci sequence is the first in 3 digits"
     (is (= 12 (problem25 3)))))
+
+(deftest probl15-test
+  (testing "For a 2x2 grid, there are 6 routes from the top left to bottom right"
+    (is (= 6 (problem15 2)))))
+
+(deftest prob15-suplimental-test
+  (testing "a 5x5 grid has 252 routes.  Adding because I need to refactor"
+    (is (= 252 (problem15 5)))))
