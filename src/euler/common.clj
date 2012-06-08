@@ -96,3 +96,8 @@
 (defn letter-to-number [c]
   (let [alpha (seq "ABCDEFGHIJKLMNOPQRSTUVWXYZ")]
     (inc (.indexOf alpha c))))
+
+(defn combine-rows [bottom top]
+  (if ( empty? top)
+      bottom
+      (map + top (map (fn [[a b]] (max a b)) (partition 2 1 bottom)))))

@@ -437,14 +437,8 @@
                (util/rangeb 1000))))
 
 ;; problem 18
-(defn combine-rows [bottom top]
-  (if ( empty? top)
-      bottom
-      (map + top (map (fn [[a b]] (max a b)) (partition 2 1 bottom)))))
-
-
 (defn problem18 [triangle]
-  (first (reduce combine-rows (reverse triangle))))
+  (first (reduce util/combine-rows (reverse triangle))))
 
 (def problem18-data
   [[ 75]
@@ -509,6 +503,5 @@
 
 
 ;; problem 25
-
 (defn problem25 [digits]
   (count (take-while #(> digits (count (str %))) (util/fibs))))
