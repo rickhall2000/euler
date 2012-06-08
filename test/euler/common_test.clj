@@ -26,3 +26,7 @@
     (is  (= 26 (letter-to-number \Z)))
     (is  (= 13 (letter-to-number \M)))
     (is  (= 4 (letter-to-number \D)))))
+
+(deftest abundant-number-test
+  (testing "12 is an abundant number"
+    (is (abundant-number? 12))))

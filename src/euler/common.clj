@@ -101,3 +101,6 @@
   (if ( empty? top)
       bottom
       (map + top (map (fn [[a b]] (max a b)) (partition 2 1 bottom)))))
+
+(defn abundant-number? [num]
+  (< (* 2 num) (apply + (all-divisors num))))

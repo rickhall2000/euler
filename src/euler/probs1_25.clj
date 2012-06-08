@@ -501,6 +501,19 @@
                  (map word-score
                       (sort (get-names (slurp "names.txt")))))))
 
+;; Problem 23
+(defn find-sums-of-abundants [biggest]
+  (let [abundants
+        (take-while (partial > biggest)
+                    (filter util/abundant-number? (iterate inc 1)))]
+    (loop [elements abundants acc #{}]
+      (if (empty? elements)
+        acc
+        (recur (rest elements) (reduce conj acc (map (partial + (first elements)) elements)))))))
+
+(defn problem23 [biggest]
+  (let [seive (find-sums-of-abundants biggest)]
+    (reduce + (filter (complement (partial contains? seive)) (range biggest)))))
 
 ;; problem 25
 (defn problem25 [digits]
