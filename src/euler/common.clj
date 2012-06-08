@@ -89,3 +89,10 @@
 
 (defn pascal-row [prior-row]
   (vec (concat [1] (map #(apply + %) (partition 2 1 prior-row)) [1] )))
+
+(defn indexed [s]
+  (map vector (iterate inc 0) s))
+
+(defn letter-to-number [c]
+  (let [alpha (seq "ABCDEFGHIJKLMNOPQRSTUVWXYZ")]
+    (inc (.indexOf alpha c))))

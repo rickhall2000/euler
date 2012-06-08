@@ -48,6 +48,14 @@
   (testing "The sum of primes below 10 = 17"
     (is (= 17 (problem10 10)))))
 
+(deftest probl15-test
+  (testing "For a 2x2 grid, there are 6 routes from the top left to bottom right"
+    (is (= 6 (problem15 2)))))
+
+(deftest prob15-suplimental-test
+  (testing "a 5x5 grid has 252 routes.  Adding because I need to refactor"
+    (is (= 252 (problem15 5)))))
+
 (deftest prob16-test
   (testing "The sum of the digits of 2^15 is 26"
     (is (= 26 (problem16 15)))))
@@ -55,6 +63,11 @@
 (deftest prob16-actual
   (testing "Testing actual solution for refactoring"
     (is (= 1366 (problem16 1000)))))
+
+(deftest prob18-test
+  (testing "The sample triangle should add up to 23"
+    (let [sample [[3] [7 4] [2 4 6] [8 5 9 3]]]
+      (is (= 23 (problem18 sample))))))
 
 (deftest prob20-test
   (testing "The sum of the digits in 10! is 27"
@@ -76,14 +89,10 @@
   (testing "Checking 21 with the real answer cause its easier that way"
     (is (= 31626 (problem21 10000)))))
 
+(deftest word-score-test
+  (testing "The letters in COLIN should add up to 53 - prob 22"
+    (is (= 53 (word-score "COLIN")))))
+
 (deftest prob25-test
   (testing "The 12th term of fibbonacci sequence is the first in 3 digits"
     (is (= 12 (problem25 3)))))
-
-(deftest probl15-test
-  (testing "For a 2x2 grid, there are 6 routes from the top left to bottom right"
-    (is (= 6 (problem15 2)))))
-
-(deftest prob15-suplimental-test
-  (testing "a 5x5 grid has 252 routes.  Adding because I need to refactor"
-    (is (= 252 (problem15 5)))))

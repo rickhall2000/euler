@@ -14,3 +14,15 @@
 (deftest pascal-row-test
   (testing "Passing in [1 1] to pascal-row should yield [1 2 1]"
     (is (= [1 2 1] (pascal-row [1 1])))))
+
+(deftest indexed-test
+  (testing "indexd function '(a b c d) shourd return ([0 a] [1 b]...)"
+    (let [result '([0 a] [1 b] [2 c] [3 d])]
+      (is (= result (indexed '(a b c d)))))))
+
+(deftest letter-to-number-test
+  (testing "passing capital letters should return their order in alphabet"
+    (is  (= 1 (letter-to-number \A)))
+    (is  (= 26 (letter-to-number \Z)))
+    (is  (= 13 (letter-to-number \M)))
+    (is  (= 4 (letter-to-number \D)))))
