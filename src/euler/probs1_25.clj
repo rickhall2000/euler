@@ -1,7 +1,8 @@
 (ns euler.probs1-25
   (:require [euler.common :as util]
             [clojure.math.numeric-tower :as cmath]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [clojure.math.combinatorics :as comb]))
 
 ;; problem 1
 (defn problem1 [upper-limit]
@@ -514,6 +515,12 @@
 (defn problem23 [biggest]
   (let [seive (find-sums-of-abundants biggest)]
     (reduce + (filter (complement (partial contains? seive)) (range biggest)))))
+
+;; problem 24
+(defn problem24 [which]
+  (take 1
+        (drop (- which 1)
+              (comb/permutations [0 1 2 3 4 5 6 7 8 9]))))
 
 ;; problem 25
 (defn problem25 [digits]
