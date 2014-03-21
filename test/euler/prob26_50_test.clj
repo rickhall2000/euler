@@ -2,6 +2,11 @@
   (:use clojure.test
         euler.probs26-50))
 
+
+(deftest prob26-test
+  (testing "the number below 10 with the longest cycle is 7 with 6"
+    (is (= [7 6] (first (problem26 10))))))
+
 (deftest prob29-test
   (testing "there are 15 combinations a^b where a and b are > 2 and < 5"
     (is (= 15 (problem29 5)))))

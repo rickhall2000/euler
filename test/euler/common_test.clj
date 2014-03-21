@@ -30,3 +30,9 @@
 (deftest abundant-number-test
   (testing "12 is an abundant number"
     (is (abundant-number? 12))))
+
+(deftest index-of-test
+  (testing "index function should return nil when not found, first index when found"
+    (is (nil? (index-of 3 [0 1 2])))
+    (is (= 2 (index-of 3 [1 2 3 4])))
+    (is (= 3 (index-of 3 [0 1 2 3 3 3 3])))))

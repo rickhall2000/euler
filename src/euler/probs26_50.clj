@@ -2,6 +2,25 @@
   (:require [euler.common :as util]
             [clojure.math.numeric-tower :as cmath]))
 
+;; problem 26
+
+(defn remainders [x]
+  (loop [q 10 acc []]
+    (let [r (rem q x)]
+      (cond
+       (zero? r) nil
+       (util/index-of r acc) (vector x
+                                (- (count acc)
+                                   (util/index-of r acc)))
+       :else (recur (* r 10) (conj acc r))))))
+
+(defn problem26 [upper-bound]
+  (->> (range 1 upper-bound)
+       (map remainders)
+       (remove nil?)
+       (sort-by #(second %))
+       (reverse)
+       (take 1)))
 
 ;; problem 29
 (defn problem29 [max]

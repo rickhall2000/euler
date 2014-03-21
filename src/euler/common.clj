@@ -104,3 +104,10 @@
 
 (defn abundant-number? [num]
   (< (* 2 num) (apply + (all-divisors num))))
+
+(defn index-of [needle haystack]
+  (loop [h haystack acc 0]
+    (cond
+     (empty? h) nil
+     (= (first h) needle) acc
+     :else (recur (rest h) (inc acc)))))
