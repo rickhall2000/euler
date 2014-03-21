@@ -10,3 +10,5 @@ pom.xml
 .lein-plugins
 names.txt
 triangle.txt
+.nrepl-port
+.lein-repl-history
