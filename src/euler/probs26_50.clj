@@ -30,12 +30,12 @@
         (reverse
          (sort-by (fn [x] (second x))
                   (for [a (range (* -1 dim) dim)
-                        b (range (* -1 dim) dim)
-                        :when (util/prime? (cmath/abs b))]
+                        b (range (* -1 dim) dim)]
                     (vector (* a b)
                             (count (take-while util/prime?
                                                (map #(apply-quadratic a b %)
                                                     (iterate inc 0)))) )) ))) )
+
 
 ;; problem 29
 (defn problem29 [max]
