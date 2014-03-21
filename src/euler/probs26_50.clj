@@ -3,7 +3,6 @@
             [clojure.math.numeric-tower :as cmath]))
 
 ;; problem 26
-
 (defn remainders [x]
   (loop [q 10 acc []]
     (let [r (rem q x)]
@@ -21,6 +20,22 @@
        (sort-by #(second %))
        (reverse)
        (take 1)))
+
+;; problem 27
+(defn apply-quadratic [b c n]
+  (+ (* n n) (* n b) c))
+
+(defn problem-27 [dim]
+  (take 1
+        (reverse
+         (sort-by (fn [x] (second x))
+                  (for [a (range (* -1 dim) dim)
+                        b (range (* -1 dim) dim)
+                        :when (util/prime? (cmath/abs b))]
+                    (vector (* a b)
+                            (count (take-while util/prime?
+                                               (map #(apply-quadratic a b %)
+                                                    (iterate inc 0)))) )) ))) )
 
 ;; problem 29
 (defn problem29 [max]
