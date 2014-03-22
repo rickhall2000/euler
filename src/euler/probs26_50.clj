@@ -79,6 +79,18 @@
   (for [a (range 2 max-to-test)
         :when (= a (sum-digits-to-nth a power-to-use))] a)))
 
+;; problem 31
+(defn problem31 [tgt denoms]
+  (cond
+   (< tgt 0) 0
+   (zero? tgt) 1
+   (empty? denoms) 0
+   :else (+ (problem31 (- tgt (first denoms)) denoms)
+      (problem31 tgt (rest denoms)))))
+
+(problem31 200 [200 100 50 20 10 5 2 1])
+
+;; problem 48
 (defn series-n-to-nth [max]
   (reduce +
           (for [n (util/rangeb max)]
