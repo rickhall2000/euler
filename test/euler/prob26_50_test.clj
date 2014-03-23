@@ -27,6 +27,11 @@
   (testing "sum of numbers can be written as 4th power of digits"
     (is (= 19316 (problem30 4 9999)))))
 
+(deftest curious?-test
+  (testing "find curious numbers"
+    (is (curious? 49 98))
+    (is (not (curious? 30 50)))))
+
 (deftest series-n-to-nth-test
   (testing "sum of 1^1 .. 10^10 = 10405071317"
     (is (= 10405071317 (series-n-to-nth 10)))))

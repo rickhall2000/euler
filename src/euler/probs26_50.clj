@@ -112,6 +112,23 @@
                         :when (pandigital? i j z)]
                     z))))
 
+;; problem 33
+(defn curious? [a b]
+  (let [a1 (read-string (subs (str a) 0 1))
+        a2 (read-string (subs (str a) 1 2))
+        b1 (read-string (subs (str b) 0 1))
+        b2 (read-string (subs (str b) 1 2))]
+    (and (= a2 b1) (not (= a2 b2)) (= (/ a b) (/ a1 b2)))))
+
+(defn problem33 []
+  (reduce *
+          (for [a (range 11 100)
+                b (range 11 100)
+                :when (and (> b a)
+                           (> (mod b 10) 0)
+                           (curious? a b))]
+             (/ a b))))
+
 ;; problem 48
 (defn series-n-to-nth [max]
   (reduce +
