@@ -36,12 +36,7 @@
                                                (map #(apply-quadratic a b %)
                                                     (iterate inc 0)))) )) ))) )
 
-;; problem 26
-(+ 5 7 9 3) ;; 24 3^2 -2 -2*2 -2*3  (3-1)
-(+ 13 17 21 25) ;; 76 5^2 -4 -4 -4  (5-1)
-(+ 49 43 37 31)  ;; 160 7^ -6 -6 -6 (7-1)
-
-;; n^2 +
+;; problem 28
 (defn get-row [n]
   (- (* 4 (* n n))
      (* 6 (- n 1))))
@@ -59,8 +54,6 @@
          (for [a (range 2N (+ 1 max))
                b (range 2N (+ 1 max))]
            (cmath/expt a b)))))
-
-
 
 ;; problem 30
 #_(def max (* 6 (cmath/expt 9 5)))
@@ -103,7 +96,21 @@
    :else (+ (problem31 (- tgt (first denoms)) denoms)
       (problem31 tgt (rest denoms)))))
 
-(problem31 200 [200 100 50 20 10 5 2 1])
+#_(problem31 200 [200 100 50 20 10 5 2 1])
+
+;; problem 32
+(defn pandigital? [& xs]
+  (let [cmb (apply str xs)]
+    (and (= (count (set cmb)) (count cmb) 9)
+         (not (util/index-of \0 cmb)))))
+
+(defn problem32 []
+  (reduce +
+          (reduce conj #{}
+                  (for [i (range 100000N) j (range 1000)
+                        :let [z (* i j)]
+                        :when (pandigital? i j z)]
+                    z))))
 
 ;; problem 48
 (defn series-n-to-nth [max]
