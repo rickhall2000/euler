@@ -36,6 +36,21 @@
                                                (map #(apply-quadratic a b %)
                                                     (iterate inc 0)))) )) ))) )
 
+;; problem 26
+(+ 5 7 9 3) ;; 24 3^2 -2 -2*2 -2*3  (3-1)
+(+ 13 17 21 25) ;; 76 5^2 -4 -4 -4  (5-1)
+(+ 49 43 37 31)  ;; 160 7^ -6 -6 -6 (7-1)
+
+;; n^2 +
+(defn get-row [n]
+  (- (* 4 (* n n))
+     (* 6 (- n 1))))
+
+(defn problem28 [side]
+  (->> (range 2 (inc side))
+       (filter odd?)
+       (map get-row)
+       (reduce + 1)))
 
 ;; problem 29
 (defn problem29 [max]

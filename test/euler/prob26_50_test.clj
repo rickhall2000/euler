@@ -7,6 +7,10 @@
   (testing "the number below 10 with the longest cycle is 7 with 6"
     (is (= [7 6] (first (problem26 10))))))
 
+(deftest prob28-test
+  (testing "the spiral diaganals of a 5x5 should add up to 101"
+    (is (= 101 (problem28 5)))))
+
 (deftest prob29-test
   (testing "there are 15 combinations a^b where a and b are > 2 and < 5"
     (is (= 15 (problem29 5)))))
