@@ -129,6 +129,20 @@
                            (curious? a b))]
              (/ a b))))
 
+;; problem 34
+(defn sum-of-facts [n]
+  (let [digits
+        (map (comp read-string str) (seq (str n)))]
+    (reduce +
+            (map util/factorial digits))))
+
+(defn problem-34 []
+  (let [upper-bound (util/factorial 10)]
+    (->> (iterate inc 3)
+         (take-while #(< % upper-bound))
+         (filter (fn [x] (= x (sum-of-facts x))))
+         (reduce +))))
+
 ;; problem 48
 (defn series-n-to-nth [max]
   (reduce +
