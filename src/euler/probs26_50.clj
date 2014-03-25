@@ -143,6 +143,32 @@
          (filter (fn [x] (= x (sum-of-facts x))))
          (reduce +))))
 
+;; problem 35
+(defn next-circle [n]
+  (let [as-str (str n)
+        circle (str (apply str (rest as-str)) (first as-str))]
+    (read-string circle)))
+
+(defn get-circles [n]
+  (let [len (count (str n))]
+    (take len
+          (iterate next-circle n))))
+
+(defn all-odd? [n]
+  (let [digits (map (comp read-string str) (seq (str n)))]
+    (every? odd? digits)))
+
+
+(defn problem-35 [upper-bound]
+  (let [possibles
+        (->> (range upper-bound)
+             (filter all-odd?)
+             (filter util/prime?)
+             (reduce conj #{2}))]
+    (count
+     (filter (fn [x] (every? possibles x))
+             (map get-circles possibles)))))
+
 ;; problem 48
 (defn series-n-to-nth [max]
   (reduce +

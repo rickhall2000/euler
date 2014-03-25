@@ -36,6 +36,10 @@
   (testing "sum of 1^1 .. 10^10 = 10405071317"
     (is (= 10405071317 (series-n-to-nth 10)))))
 
+(deftest problem35-test
+  (testing "there are 13 circular primes below 100"
+    (is (= 13 (problem-35 100)))))
+
 (deftest prob48-test
   (testing "last 10 digits of series 10^10 = 0405071317"
     (is (= "0405071317" (problem48 10)))))
