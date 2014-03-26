@@ -169,6 +169,19 @@
      (filter (fn [x] (every? possibles x))
              (map get-circles possibles)))))
 
+(defn palendrome? [n]
+  (let [num (str n)]
+    (= (seq num) (reverse num))))
+
+(defn problem36 []
+  (->> (range 1000000)
+       (filter odd?)
+       (filter (fn [x] (palendrome? (util/binary x))))
+       (filter palendrome?)
+       (reduce +)))
+
+
+
 ;; problem 48
 (defn series-n-to-nth [max]
   (reduce +

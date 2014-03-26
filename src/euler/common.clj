@@ -111,3 +111,11 @@
      (empty? h) nil
      (= (first h) needle) acc
      :else (recur (rest h) (inc acc)))))
+
+(defn binary [n]
+  (loop [n n acc ""]
+    (cond
+     (= 0 n) acc
+     :else  (recur
+             (/ (- n (mod n 2)) 2)
+             (str (mod n 2) acc)))))
