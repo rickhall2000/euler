@@ -283,3 +283,22 @@
          (reverse
           (take 10 (reverse
                     (seq (str (series-n-to-nth max))))))))
+
+;; problem 49
+(defn are-permutations [a b]
+  (let [dig-a (set (util/digits a))
+        dig-b (set (util/digits b))]
+    (= dig-a dig-b)))
+
+(defn problem49 []
+  (->>
+   (for [fst (range 1000 10000)
+         i (range 1 4000)
+         :when (and (odd? fst) (even? i) (util/prime? fst))]
+     [fst (+ fst i) (+ fst i i)])
+   (filter (fn [[fst snd thd]]
+             (and (are-permutations fst snd)
+                  (are-permutations snd thd)
+                  (util/prime? snd)
+                  (util/prime? thd))))
+   (take 2)))
