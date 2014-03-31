@@ -1,5 +1,6 @@
 (ns euler.common
-  (:require [clj-time.core :as time ]))
+  (:require [clj-time.core :as time ]
+            [clojure.math.numeric-tower :as cmath]))
 
 (defmacro rangeb [last]
   (list 'range 1 (list '+ 1 last)))
@@ -134,3 +135,17 @@
                    (read-string
                     (str
                      (subs filler 0 (- 9 len))))))))
+
+(defn are-permutations [a b]
+  (let [dig-a (set (digits a))
+        dig-b (set (digits b))]
+    (= dig-a dig-b)))
+
+(defn is-pent? [n]
+  (zero? (mod
+          (/ (+
+              (cmath/sqrt (+ 1 (* 24 n)) ) 1) 6) 1)))
+
+(defn is-tri? [n]
+  (zero? (mod
+          (/ (- (cmath/sqrt (+ (* 8 n) 1)) 1) 2) 1)))

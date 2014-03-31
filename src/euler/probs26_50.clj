@@ -251,12 +251,8 @@
        (take 1)))
 
 ;; problem 44
-(defn is-pent? [n]
-  (zero? (mod
-          (/ (+
-              (cmath/sqrt (+ 1 (* 24 n)) ) 1) 6) 1)))
 
-(def pent-mem (memoize is-pent?))
+(def pent-mem (memoize util/is-pent?))
 
 (defn problem-44 []
   (->>
@@ -272,6 +268,14 @@
    (filter (fn [x] (pent-mem (second x))))
    (take 1)))
 
+;; problem 45
+(defn problem-45 []
+  (->> (iterate inc 1)
+       (map util/hex)
+       (filter util/is-pent?)
+       (filter util/is-tri?)
+       (take 3)))
+
 ;; problem 48
 (defn series-n-to-nth [max]
   (reduce +
@@ -285,11 +289,6 @@
                     (seq (str (series-n-to-nth max))))))))
 
 ;; problem 49
-(defn are-permutations [a b]
-  (let [dig-a (set (util/digits a))
-        dig-b (set (util/digits b))]
-    (= dig-a dig-b)))
-
 (defn problem49 []
   (->>
    (for [fst (range 1000 10000)
@@ -297,8 +296,8 @@
          :when (and (odd? fst) (even? i) (util/prime? fst))]
      [fst (+ fst i) (+ fst i i)])
    (filter (fn [[fst snd thd]]
-             (and (are-permutations fst snd)
-                  (are-permutations snd thd)
+             (and (util/are-permutations fst snd)
+                  (util/are-permutations snd thd)
                   (util/prime? snd)
                   (util/prime? thd))))
    (take 2)))
