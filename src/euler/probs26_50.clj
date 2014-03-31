@@ -232,6 +232,17 @@
    reverse
    (take 1)))
 
+;; problem 40
+(defn problem40 []
+ (let [xs (apply str (range 1 1000000))]
+   (->>
+    (iterate (partial * 10) 1)
+    (take 7)
+    (map dec)
+    (map (partial nth xs))
+    (map (comp read-string str))
+    (reduce * ))))
+
 ;; problem 48
 (defn series-n-to-nth [max]
   (reduce +
