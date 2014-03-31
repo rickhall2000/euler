@@ -99,17 +99,12 @@
 #_(problem31 200 [200 100 50 20 10 5 2 1])
 
 ;; problem 32
-(defn pandigital? [& xs]
-  (let [cmb (apply str xs)]
-    (and (= (count (set cmb)) (count cmb) 9)
-         (not (util/index-of \0 cmb)))))
-
 (defn problem32 []
   (reduce +
           (reduce conj #{}
                   (for [i (range 100000N) j (range 1000)
                         :let [z (* i j)]
-                        :when (pandigital? i j z)]
+                        :when (util/pandigital? i j z)]
                     z))))
 
 ;; problem 33
@@ -207,6 +202,19 @@
           (take n
                 (filter truncatable-prime?
                         (iterate inc 1N)))))
+
+;; problem 38
+(defn pans []
+  (filter  (partial apply util/pandigital?)
+          (for [i [[1 2] [1 2 3] [1 2 3 4] [1 2 3 4 5]]
+                j (range 1 500000)]
+            (map (partial * j) i))))
+
+(defn problem38 []
+  (apply max
+   (map read-string
+        (map (partial apply str)
+             (pans)))))
 
 ;; problem 48
 (defn series-n-to-nth [max]

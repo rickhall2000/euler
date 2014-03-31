@@ -118,3 +118,8 @@
 
 (defn digits [n]
         (map (comp read-string str) (seq (str n))))
+
+(defn pandigital? [& xs]
+  (let [cmb (apply str xs)]
+    (and (= (count (set cmb)) (count cmb) 9)
+         (not (index-of \0 cmb)))))
