@@ -216,6 +216,22 @@
         (map (partial apply str)
              (pans)))))
 
+;; problem 39
+(defn problem39 []
+  (->>
+   (for [i (range 1 1000)
+         j (range 1 1000)
+         k (range 1 1000)
+         :when  (and
+                 (<= i j)
+                 (<= (+ i j k) 1000)
+                 (= (* k k) (+ (* i i) (* j j))))]
+     (+ i j k))
+   frequencies
+   (sort-by second)
+   reverse
+   (take 1)))
+
 ;; problem 48
 (defn series-n-to-nth [max]
   (reduce +
