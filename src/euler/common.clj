@@ -123,3 +123,14 @@
   (let [cmb (apply str xs)]
     (and (= (count (set cmb)) (count cmb) 9)
          (not (index-of \0 cmb)))))
+
+(defn pandigital-n [num]
+  (let [as-string (str num)
+        filler "987654321"
+        len (count as-string)]
+    (if (= 9 len)
+      (pandigital? num)
+      (pandigital? num
+                   (read-string
+                    (str
+                     (subs filler 0 (- 9 len))))))))

@@ -243,6 +243,14 @@
     (map (comp read-string str))
     (reduce * ))))
 
+;; problem 41
+(defn problem41 []
+  (->> (range 7654321 0 -1)
+       (filter util/pandigital-n)
+       (filter util/prime?)
+       (take 1)))
+
+
 ;; problem 48
 (defn series-n-to-nth [max]
   (reduce +
