@@ -250,6 +250,27 @@
        (filter util/prime?)
        (take 1)))
 
+;; problem 44
+(defn is-pent? [n]
+  (zero? (mod
+          (/ (+
+              (cmath/sqrt (+ 1 (* 24 n)) ) 1) 6) 1)))
+
+(def pent-mem (memoize is-pent?))
+
+(defn problem-44 []
+  (->>
+   (for [i (iterate inc 1)]
+     (let [top (util/pent i)]
+       (for [j (range i 1 -1)
+             :when (< j i)]
+         (let [bot (util/pent j)]
+           [(+ top bot) (- top bot)]))))
+   (remove empty?)
+   (mapcat (fn [x] x))
+   (filter (fn [x] (pent-mem (first x))))
+   (filter (fn [x] (pent-mem (second x))))
+   (take 1)))
 
 ;; problem 48
 (defn series-n-to-nth [max]
