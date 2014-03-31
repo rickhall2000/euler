@@ -131,10 +131,8 @@
 
 ;; problem 34
 (defn sum-of-facts [n]
-  (let [digits
-        (map (comp read-string str) (seq (str n)))]
-    (reduce +
-            (map util/factorial digits))))
+  (reduce +
+          (map util/factorial (util/digits n))))
 
 (defn problem-34 []
   (let [upper-bound (util/factorial 10)]
@@ -155,9 +153,7 @@
           (iterate next-circle n))))
 
 (defn all-odd? [n]
-  (let [digits (map (comp read-string str) (seq (str n)))]
-    (every? odd? digits)))
-
+  (every? odd? (util/digits n)))
 
 (defn problem-35 [upper-bound]
   (let [possibles
@@ -169,6 +165,7 @@
      (filter (fn [x] (every? possibles x))
              (map get-circles possibles)))))
 
+;; Problem 36
 (defn palendrome? [n]
   (let [num (str n)]
     (= (seq num) (reverse num))))
@@ -180,7 +177,36 @@
        (filter palendrome?)
        (reduce +)))
 
+;; Problem 37
+(defn left-truncs [n]
+  (reverse
+   (map #(read-string (apply str %))
+        (take-while #(not (empty? %))
+                    (iterate rest (util/digits n))))))
 
+(defn right-truncs [n]
+  (map #(read-string (apply str %))
+       (map #(reverse (util/digits %))
+            (left-truncs
+             (read-string
+              (apply str
+                     (reverse
+                      (util/digits n))))))))
+
+(def prime-memo (memoize util/prime?))
+
+(defn truncatable-prime? [n]
+  (and
+   (> n 10)
+   (every? #{1 2 3 4 5 6 7 8 9} (util/digits n))
+   (every? prime-memo (right-truncs n))
+   (every? prime-memo (left-truncs n))))
+
+(defn problem-37 [n]
+  (reduce +
+          (take n
+                (filter truncatable-prime?
+                        (iterate inc 1N)))))
 
 ;; problem 48
 (defn series-n-to-nth [max]

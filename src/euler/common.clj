@@ -1,14 +1,11 @@
 (ns euler.common
   (:require [clj-time.core :as time ]))
 
-
 (defmacro rangeb [last]
   (list 'range 1 (list '+ 1 last)))
 
-
 (defn number-to-char-sequence [number]
   (seq (str number)))
-
 
 (defn factorial [start]
   (loop [n start acc 1 ]
@@ -21,7 +18,6 @@
        (iterate
          (fn [[a b]]
            [b (+ a b)]) [0 1])))
-
 
 (defn all-divisors [n]
   (for [i (rangeb n) :when (zero? (rem n i))]
@@ -119,3 +115,6 @@
      :else  (recur
              (/ (- n (mod n 2)) 2)
              (str (mod n 2) acc)))))
+
+(defn digits [n]
+        (map (comp read-string str) (seq (str n))))
